@@ -1,13 +1,34 @@
 'use client';
 
-import { Fragment, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { addOne, initCounterState, subtractOne } from "@/store/counter/counterSlice";
+import { Fragment, useEffect } from "react";
 
 interface Props {
   value?: number;
 }
 
+interface CounterResponse {
+  count: number;
+}
+
+
+const getApiCounter = async (): Promise<CounterResponse> => {
+  const data = await fetch('/api/counter').then(res => res.json());
+  return data;
+}
+
 export const CartCounter = ({ value = 0 }: Props) => {
-  const [count, setCount] = useState(value);
+  const count = useAppSelector(state => state.counter.count);
+  const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   dispatch(initCounterState(value));
+  // }, [ dispatch, value ]);
+  useEffect(() => {
+    getApiCounter().then(data => dispatch(initCounterState(data.count)))
+  }, [dispatch])
+  
 
   return (
     <Fragment>
@@ -15,14 +36,14 @@ export const CartCounter = ({ value = 0 }: Props) => {
       <div className="flex items-center">
         <button
           className="flex items-center justify-center p-2 rounded-xl bg-gray-900 text-white hover:bg-gray-600 transition-all w-[100px] mr-2"
-          onClick={() => setCount(prev => prev - 1)}
+          onClick={() => dispatch(subtractOne())}
         >
           -1
         </button>
         <button
           className="flex items-center justify-center p-2 rounded-xl bg-gray-900 text-white hover:bg-gray-600 transition-all w-[100px] mr-2"
-          onClick={() => setCount(prev => prev + 1)}
 
+          onClick={() => dispatch(addOne())}
         >
           +1
         </button>
