@@ -2,6 +2,8 @@ import Image from "next/image";
 import { IoBrowsersOutline, IoCalculator, IoLogoReact } from "react-icons/io5";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 import { MdCatchingPokemon } from "react-icons/md";
+import { SiPokemon } from "react-icons/si";
+
 
 const menuItems = [
   {
@@ -21,6 +23,12 @@ const menuItems = [
     icon: <MdCatchingPokemon size={25} />,
     title: 'Pokemons',
     subtitle: 'Static generation',
+  },
+  {
+    path: '/dashboard/favorites',
+    icon: <SiPokemon size={25} />,
+    title: 'Favorites',
+    subtitle: 'Global State',
   }
 ];
 

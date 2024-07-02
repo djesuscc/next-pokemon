@@ -1,7 +1,5 @@
 import { PokemonGrid, PokemonsResponse, SimplePokemon } from "@/pokemons";
 
-
-
 export const metadata = {
  title: 'Pokemons',
  description: 'Pokemons list 151',
