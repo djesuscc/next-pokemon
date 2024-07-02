@@ -15,7 +15,7 @@ interface Props {
 export const PokemonCard = ({ pokemon }: Props) => {
   const { id, name } = pokemon;
   const dispatch = useDispatch();
-  const isFavorite = useAppSelector(state => !!state.pokemons[id]);
+  const isFavorite = useAppSelector(state => !!state.pokemons.favorites[id]);
 
   const onToggle = () => {
     dispatch(toggleFavorite(pokemon))
